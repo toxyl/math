@@ -64,6 +64,26 @@ func Wrap[N Number](val, min, max N) N {
 	return Add(val, min)
 }
 
+// Normalize converts a value from a given range [min, max] to a normalized value in [0,1].
+// If min equals max, it returns 0.
+func Normalize[N Number](val, min, max N) N {
+	if max == min {
+		return 0
+	}
+	return (val - min) / (max - min)
+}
+
+// Denormalize converts a normalized value in [0,1] to the target range [min, max].
+// The normalized value is clamped between 0 and 1.
+func Denormalize[N Number](norm, min, max N) N {
+	if norm < 0 {
+		norm = 0
+	} else if norm > 1 {
+		norm = 1
+	}
+	return norm*(max-min) + min
+}
+
 // FormatNumber formats a number with appropriate suffixes for large values.
 func FormatNumber[N Number](number N, decimals int) string {
 	suffix := " "
