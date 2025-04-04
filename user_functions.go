@@ -17,6 +17,12 @@ func Blend[N Number](x, y N, p float64) N {
 	return N(float64(x)*(1-p) + float64(y)*p)
 }
 
+// Lerp performs linear interpolation between a and b with weight t.
+// The parameter t is typically in range [0,1].
+func Lerp[N Number](a, b N, t float64) N {
+	return N(float64(a) + t*(float64(b)-float64(a)))
+}
+
 // Avg calculates the average of a variadic number of values.
 func Avg[N Number](x ...N) N {
 	res := 0.0
