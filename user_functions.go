@@ -120,3 +120,14 @@ func MaxLenStr(strs ...string) int {
 	}
 	return l
 }
+
+// ApproxEqual checks if two numbers are approximately equal within a given tolerance.
+// The tolerance is the maximum allowed difference between the numbers.
+// For example, if tolerance is 0.001, the numbers are considered equal if their difference is less than 0.001.
+func ApproxEqual[N Number](x, y N, tolerance float64) bool {
+	if tolerance < 0 {
+		return false
+	}
+	diff := Abs(Sub(x, y))
+	return float64(diff) <= tolerance
+}
